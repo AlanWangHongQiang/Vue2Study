@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue.directive自定义指令</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>
+        vue.directive自定义指令
+    </h1>
+    <hr>
+    <div id="app">
+        <div v-jspang="color">
+            {{num}}
+        </div>
+        <button @click = "add">ADD</button>
+        
+    </div>
+    <button onclick="unbind()">
+        un-bind
+    </button>
+    <script type='text/javascript'>
+        function unbind(){
+            app.$destroy();
+        }
+        // Vue.directive("jspang",function(el,binding,vnode){
+        //         console.log(el);
+        //         console.log(binding);
+        //         el.style = "color:" + binding.value
+        // })
+        Vue.directive("jspang",{
+            bind : function(){console.log("第一次绑定时调用")},
+            inserted : function(){console.log("插入到父元素之后调用")},
+            update : function(){console.log("更新时调用")},
+            componentUpdated : function(){console.log("组件更新后调用")},
+            unbind : function(){console.log("解绑")}
+
+        })
+
+        var app = new Vue({
+            el:'#app',
+            data : {
+                num : 10,
+                color : "red"
+
+            },
+            methods:{
+                add :function(){
+                    this.num++
+                }
+            }
+        })
+    </script>
+</body>
+</html>
