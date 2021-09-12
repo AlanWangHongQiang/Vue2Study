@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>
+        Template三种写法
+    </h1>
+    <hr>
+    <div id="app">
+        {{message}}
+    </div>
+    <!-- 此处必须是template标签 -->
+    <!-- 方便多人协作，带个小弟给你切图 -->
+    <template id='dd2'>
+        <h2 style='color:red'>我是标签模板</h2>
+    </template>
+    <!-- 方便外部引用，可写src -->
+    <script type="x-template" id='dd3'>
+        <h2 style='color:red'>我是script模板</h2>
+    </script>
+    <script type='text/javascript'>
+        //data,el都叫选项
+        var app = new Vue({
+            el:'#app',
+            data : {
+                message : 'I am a message'
+            },
+            // template : `
+            //     <h2 style='color:red'>我是选项模板</h2>
+            // `
+            template : '#dd3'
+        })
+    </script>
+</body>
+</html>
