@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>
+        组件
+    </h1>
+    <hr>
+    <div id="app">
+        <panda where='sichuan'></panda>
+        <panda from-where='sichuan'></panda>
+        <panda :where = 'serverData' :from-where='serverData1'></panda>
+    </div>
+    <!-- <div id='ppa'>
+        <jspang></jspang>
+    </div> -->
+    <script type='text/javascript'>
+        var app = new Vue({
+            el:'#app',
+            data : {
+                message : 'I am a message',
+                serverData : 'china',
+                serverData1 : 'sichuan'
+            },
+            //panda就相当于名字了额，所以要写成字符串
+            components : {
+                "panda" : {
+                    template : `<h1 style="color:red">Panda from {{fromWhere}} AND {{where}} </h1>`,
+                    props :[
+                        "where",
+                        "fromWhere"
+                    ]
+                }
+            }
+        })
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>
+        组件
+    </h1>
+    <hr>
+    <div id="app">
+        <panda where='123'></panda>
+    </div>
+    
+    <script type='text/javascript'>
+        var city = {
+            template :  `<h1 style="color:green">Panda from sichuan of china ， Hello {{name}}</h1>`,
+            props : [
+                "name"
+            ]
+        }
+        //此处会有顺序的问题
+        var panda = {
+            template :  `
+            <div>
+                <p>Panda from china and {{where}}</p>
+                <city1 :name='where'></city1>
+            </div>    
+            `,
+            components :{
+                "city1":city
+            },
+            props:[
+                "where"
+            ]
+        }
+
+        
+
+        var app = new Vue({
+            el:'#app',
+            data : {
+                message : 'I am a message'
+            },
+            //panda就相当于名字了额，所以要写成字符串
+            components : {
+                "panda" : panda,
+            }
+        })
+        
+    </script>
+</body>
+</html>

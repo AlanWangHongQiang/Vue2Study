@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>
+        组件
+    </h1>
+    <hr>
+    <div id="app">
+        <jspang></jspang>
+        <panda></panda>
+    </div>
+    <!-- <div id='ppa'>
+        <jspang></jspang>
+    </div> -->
+    <script type='text/javascript'>
+        // 指令定义的是标签属性，而组件定义的是标签
+        Vue.component('jspang',{
+            template : `<h1 style="color:red">我是全局组件</h1>`
+
+        })
+        var app = new Vue({
+            el:'#app',
+            data : {
+                message : 'I am a message'
+            },
+            //panda就相当于名字了额，所以要写成字符串
+            components : {
+                "panda" : {
+                    template : `<h1 style="color:red">我是局部组件</h1>`
+                }
+            }
+        })
+        // var app1 = new Vue({
+        //     el:'#ppa',
+        //     data : {
+        //         message : 'I am a message'
+        //     }
+        // })
+    </script>
+</body>
+</html>
