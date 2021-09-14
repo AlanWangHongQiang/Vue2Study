@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>methods的用法</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>
+        methods的用法
+    </h1>
+    <hr>
+    <div id="app">
+       {{a}}
+       <button @click='add(tick,$event)'>Add</button>
+       <div>
+           <!-- 表示调用构造器里的原始方法 -->
+           <btn @click.native = add(tick)></btn>
+       </div>
+       <button onclick="app.add(app.tick,event)">外部click</button>
+    </div>
+    <script type='text/javascript'>
+        var btn = Vue.component("btn",{
+            template : `<button >组件Add</button>`
+        })
+        var app = new Vue({
+            el:'#app',
+            data : {
+                message : 'I am a message',
+                a : 100,
+                tick : 'abc'
+            },
+            methods:{
+                add : function(num,event){
+                    console.log(event)
+                    if(num!=''&&num!=undefined){
+                        this.a += num
+                    }else{
+                        this.a +=10
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

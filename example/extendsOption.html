@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扩展选项</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <h1>
+        扩展选项
+    </h1>
+    <hr>
+    <div id="app">
+        {{num}}
+        ${ num  }
+        <p>
+            <button @click="add()">
+                Add
+            </button>
+        </p>
+    </div>
+    <script type='text/javascript'>
+        //与mixin略有不同，一个是他传入的不是数组，而是直接的对象
+        var extendsObj = {
+            updated: function () {
+                console.log('I am extends update function')
+            },
+            methods :{
+                add : function(){
+                    console.log('I am extends add function')
+                }
+            }
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '123',
+                num: 123
+            },
+            updated: function () {
+                console.log('I am native update function')
+            },
+            methods: {
+                add: function () {
+                    console.log('I am native add function')
+                    this.num++
+                }
+            },
+            extends : extendsObj,
+            //会导致{{}}的插值不能再用了，慎用
+            delimiters : ['${','}']
+        })
+    </script>
+</body>
+
+</html>

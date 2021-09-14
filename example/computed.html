@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Props选项</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>
+        Props选项
+    </h1>
+    <hr>
+    <div id="app">
+       <div> price is {{newPrice}}</div>
+       <ul>
+           <li v-for="item in reverseNews">
+                {{item.title}} - {{item.date}}
+           </li>
+       </ul>
+       <ul>
+        <li v-for="item in newsList">
+             {{item.title}} - {{item.date}}
+        </li>
+    </ul>
+    </div>
+    <script type='text/javascript'>
+       var newsList = [
+           {title:'xjp' , date : '2021-09-14'},
+           {title:'xjp1' , date : '2021-09-13'},
+           {title:'xjp2' , date : '2021-09-12'},
+           {title:'xjp3' , date : '2021-09-11'}
+       ]
+        var app = new Vue({
+            el : '#app',
+            data:{
+                message :'123',
+                price : 123,
+                newsList : newsList
+            },
+            computed :{
+                newPrice:function(){
+                    return  "￥" + this.price;
+                },
+                reverseNews : function(){
+                    //这个不对
+                    //return this.newsList.reverse();
+                    return [...this.newsList].reverse();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

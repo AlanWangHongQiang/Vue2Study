@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watch 选项</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <h1>
+        watch 选项
+    </h1>
+    <hr>
+    <div id="app">
+        <input type="text" v-model='tempreture'>
+        <button @click="add()">Add</button>
+        <button @click="reduce()">reduce</button>
+        <div>
+            今日温度 ： {{tempreture}}
+            穿衣建议 ： {{comment}}
+        </div>
+
+    </div>
+    <script type='text/javascript'>
+        var comments = ["全脱", "穿一半", "穿棉服"];
+        var app = new Vue({
+            el: '#app',
+            data: {
+                tempreture: 15,
+                comment: "穿一半"
+            },
+            methods: {
+                add: function () {
+                    this.tempreture += 5
+                },
+                reduce: function () {
+                    this.tempreture -= 1
+                }
+            },
+            // watch: {
+            //     "tempreture": function (newValue, oldValue) {
+            //         if (newValue >= 26) {
+            //             this.comment = comments[0]
+            //         }
+            //         else if (newValue < 26 && newValue > 10) {
+            //             this.comment = comments[1]
+            //         }
+            //         else {
+            //             this.comment = comments[2]
+            //         }
+            //     }
+            // }
+        })
+        //$加方法名一般就是Vue原生方法
+        app.$watch("tempreture", function (newValue, oldValue) {
+            if (newValue >= 26) {
+                this.comment = comments[0]
+            }
+            else if (newValue < 26 && newValue > 10) {
+                this.comment = comments[1]
+            }
+            else {
+                this.comment = comments[2]
+            }
+        })
+    </script>
+</body>
+
+</html>

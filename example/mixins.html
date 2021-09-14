@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixins选项</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>
+        Mixins选项(1.已经上线，临时加功能用到，不污染构造器 2.公用的mixin方法，需要的混入)
+    </h1>
+    <hr>
+    <div id="app">
+      {{num}}
+      <p>
+          <button @click = "add()">
+            Add
+          </button>
+      </p>
+    </div>
+    <script type='text/javascript'>
+        // 混入的先执行，原生的后执行
+        var addConsole = {
+            updated : function(){
+                console.log("extend updated method happen")
+            },
+            methods :{
+                add : function(){
+                    console.log("extend add method happen")
+                    this.num ++
+                }
+            }
+        }
+        //全局混入，且没有s，app实例方法一般都带$,Vue的类方法一般不带
+        Vue.mixin({
+            updated : function(){
+                console.log('我是全局的混入')
+            }
+        })
+        var app = new Vue({
+            el : '#app',
+            data:{
+                message :'123',
+                num : 123
+            },
+            updated :function(){
+                console.log('native updated method happen')
+            },
+            methods : {
+                add : function(){
+                    console.log("native add method happen")
+                    this.num ++
+                }
+            },
+            mixins : [addConsole]
+        })
+    </script>
+</body>
+</html>
