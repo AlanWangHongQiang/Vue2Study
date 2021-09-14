@@ -33,7 +33,9 @@
                 add : function(){
                     console.log('I am extends add function')
                 }
-            }
+            },
+            //extend选项是有机会侵入的外层的对象的，相当于一个小app，所以它可以单独挂载到一个元素上
+            //template : '<div>123</div>'
         }
         var app = new Vue({
             el: '#app',

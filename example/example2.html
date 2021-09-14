@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实例方法2</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <h1>
+        实例方法2
+    </h1>
+    <hr>
+    <div id="app">
+        {{message}}
+    </div>
+    <div>
+        <button onclick = "destroy()">销毁</button>
+        <button onclick = "reload()">刷新</button>
+        <button onclick = "tick()">更改数据加钩子</button>
+        <button onclick = "changeMessage()">更改数据</button>
+    </div>
+
+    <script type='text/javascript'>
+        function destroy(){
+            vm.$destroy();
+        }
+        function reload(){
+            vm.$forceUpdate();
+        }
+        function tick(){
+            vm.message = "update message information";
+            vm.$nextTick(function(){
+                console.log('message 更新完后我被调用了')
+            })
+        }
+        
+        function changeMessage(){
+            vm.message += '789'
+        }
+        var qiang = Vue.extend({
+            template: `<p>{{message}}</p>`,
+            data: function () {
+                return {
+                    message: '123'
+                }
+            },
+            mounted : function(){
+                console.log("mounted 被创建")
+            },
+            destroyed: function(){
+                console.log("啊，我被销毁了")
+            },
+            updated : function(){
+                console.log("啊，我被更新了")
+            },
+            watch:{
+                "message" : function(newValue,oldValue){
+                    console.log('message 更新完后我被调用了')
+                }
+            }
+        })
+
+        // var app = new Vue({
+        //     el: '#app',
+        //     data: {
+        //         message: 'I am a message'
+        //     }
+        // })
+         //Vue.extend和extendOption其实就是一个全局，一个是对象内部的
+         //Vue.directve是自定义指令，只是他又改变template的功能而已，和extend本身关系不大
+        var vm = new qiang().$mount('#app')
+
+          
+    </script>
+</body>
+
+</html>
