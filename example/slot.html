@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slot</title>
+    <script src="../assets/js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>
+        slot内置组件
+    </h1>
+    <hr>
+    <div id="app">
+        <!-- 具名插槽 -->
+       <jspang>
+           <span slot='blogUrl'>{{jspangData.blogUrl}}</span>
+           <span slot='skill'>{{jspangData.skill}}</span>
+           caonima
+           <span slot='skill1'>{{jspangData.skill}}</span>
+           caonima again
+       </jspang>
+    </div>
+    <!-- template 下必须有个根root -->
+    <!-- 就是为了获取app内部的数据 -->
+    <template id='temp'>
+        <div>
+           <p>blogurl : <slot name='blogUrl'></slot></p>
+           <p>skill : <slot name='skill'></slot></p>
+           <p>skill : <slot name='skill1'></slot></p>
+           <p><slot></slot></p>
+        </div>
+    </template>    
+    <script type='text/javascript'>
+        var jspang = {
+            template : '#temp',
+           
+        }
+        var app = new Vue({
+            el:'#app',
+            data : {
+                message : 'I am a message',
+                jspangData :{
+                    blogUrl : 'https://www.baidu.com',
+                    skill : 'Web C#'
+                }
+            },
+            components : {
+                "jspang" : jspang
+            }
+        })
+    </script>
+</body>
+</html>

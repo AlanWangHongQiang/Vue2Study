@@ -4,24 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>实例事件</title>
     <script src="../assets/js/vue.js" type="text/javascript"></script>
 </head>
 <body>
     <h1>
-        Hello world
+        实例事件
     </h1>
     <hr>
     <div id="app">
-        {{message}}
+        {{num}}
+        <p><button @click='add'>Add</button></p>
     </div>
+    <p><button onclick="reduce()">reduce</button></p>
+    <p><button onclick="app.$emit('reduce')">reduce1</button></p>
+    <p><button onclick="reduceOnce()">reduce once</button></p>
+    <p><button onclick="off('reduce')">unbind reduce</button></p>
     <script type='text/javascript'>
         var app = new Vue({
             el:'#app',
             data : {
-                message : 'I am a message'
+                message : 'I am a message',
+                num : 1
+            },
+            methods : {
+                add : function(){
+                    this.num ++
+                }
             }
         })
+        app.$on('reduce',function(){
+            console.log('执行了外部的reduce方法')
+            this.num --
+        })
+        app.$once('reduceOnce',function(){
+            console.log('只能执行一次的reduce方法')
+            this.num --
+        })
+       
+        function reduce(){
+            app.$emit('reduce')
+        }
+
+        function reduceOnce(){
+            app.$emit('reduceOnce')
+        }
+
+        function off(unbindName){
+            app.$off(unbindName)
+        }
     </script>
 </body>
 </html>
